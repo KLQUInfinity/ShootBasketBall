@@ -5,6 +5,8 @@ using UnityEngine;
 [CustomEditor(typeof(PlayerManager))]
 public class PlayerManagerEditor : Editor
 {
+    MonoScript Script;
+
     #region Camera Setting
     private bool cameraSettingFoldout;
 
@@ -21,11 +23,14 @@ public class PlayerManagerEditor : Editor
     private bool shootSettingFoldout;
 
     SerializedProperty ballPrefab;
+    SerializedProperty ballSpeed;
 
     #endregion
 
     private void OnEnable()
     {
+        Script = MonoScript.FromMonoBehaviour((PlayerManager)target);
+
         #region Camera Setting        
         rotSpeed = serializedObject.FindProperty("RotSpeed");
 
@@ -38,19 +43,25 @@ public class PlayerManagerEditor : Editor
 
         #region Shoot setting
         ballPrefab = serializedObject.FindProperty("BallPrefab");
+        ballSpeed = serializedObject.FindProperty("BallSpeed");
         #endregion
 
         #region Editor Variables
-        cameraSettingFoldout = EditorPrefs.GetBool("cameraSettingFoldout",false);
+        cameraSettingFoldout = EditorPrefs.GetBool("cameraSettingFoldout", false);
         shootSettingFoldout = EditorPrefs.GetBool("shootSettingFoldout", false);
         #endregion
     }
 
     public override void OnInspectorGUI()
     {
+        GUI.enabled = false;
+        Script = EditorGUILayout.ObjectField("Script:", Script, typeof(MonoScript), false) as MonoScript;
+        GUI.enabled = true;
+
         serializedObject.Update();
 
         CameraSettingEditor();
+        EditorGUILayout.Space();
         ShootSettingEditor();
 
         serializedObject.ApplyModifiedProperties();
@@ -58,8 +69,6 @@ public class PlayerManagerEditor : Editor
 
     private void CameraSettingEditor()
     {
-        EditorGUILayout.Space();
-
         EditorStyles.foldout.fontStyle = FontStyle.Bold;
         cameraSettingFoldout = EditorGUILayout.Foldout(cameraSettingFoldout, new GUIContent("Camera Setting"), true);
         EditorStyles.foldout.fontStyle = FontStyle.Normal;
@@ -86,8 +95,6 @@ public class PlayerManagerEditor : Editor
 
     private void ShootSettingEditor()
     {
-        EditorGUILayout.Space();
-
         EditorStyles.foldout.fontStyle = FontStyle.Bold;
         shootSettingFoldout = EditorGUILayout.Foldout(shootSettingFoldout, new GUIContent("Shoot Setting"), true);
         EditorStyles.foldout.fontStyle = FontStyle.Normal;
@@ -95,6 +102,7 @@ public class PlayerManagerEditor : Editor
         if (shootSettingFoldout)
         {
             EditorGUILayout.PropertyField(ballPrefab, new GUIContent("Ball Prefab"));
+            EditorGUILayout.PropertyField(ballSpeed, new GUIContent("Ball Speed"));
         }
 
         EditorPrefs.GetBool("shootSettingFoldout", shootSettingFoldout);

@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
 
     #region Shoot Setting
     public GameObject BallPrefab;
+    public float BallSpeed;
     #endregion
 
     private void Update()
@@ -31,7 +32,10 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ShootBall();
+        if (Input.GetButtonDown("Fire1"))
+        {
+            ShootBall();
+        }
     }
 
     private void RotateCamera()
@@ -72,9 +76,8 @@ public class PlayerManager : MonoBehaviour
 
     private void ShootBall()
     {
-        if (Input.GetAxis("Fire1") != 0)
-        {
-
-        }
+        GameObject instance = Instantiate(BallPrefab);
+        instance.transform.position = transform.position;
+        instance.GetComponent<Rigidbody>().velocity = Vector3.forward * BallSpeed * Time.deltaTime;
     }
 }
