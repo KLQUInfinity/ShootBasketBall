@@ -230,7 +230,7 @@ MonoBehaviour:
   LockYRot: 1
   YRotLimit: 60
   BallPrefab: {fileID: 181448, guid: f13ef45a14d378049a882a35a9588d8c, type: 3}
-  BallSpeed: 950
+  BallSpeed: 750
   FireRate: 0.5
 --- !u!4 &66069007
 Transform:
