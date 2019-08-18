@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -88,7 +88,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 2e082443e51ecc04db5bcee95fc074ce,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -225,11 +226,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RotSpeed: 5
   LockXRot: 1
-  XRotLimit: 30
+  XRotLimit: 40
   LockYRot: 1
   YRotLimit: 60
   BallPrefab: {fileID: 181448, guid: f13ef45a14d378049a882a35a9588d8c, type: 3}
-  BallSpeed: 500
+  BallSpeed: 950
+  FireRate: 0.5
 --- !u!4 &66069007
 Transform:
   m_ObjectHideFlags: 0

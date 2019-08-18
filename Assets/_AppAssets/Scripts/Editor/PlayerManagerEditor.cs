@@ -24,7 +24,7 @@ public class PlayerManagerEditor : Editor
 
     SerializedProperty ballPrefab;
     SerializedProperty ballSpeed;
-
+    SerializedProperty fireRate;
     #endregion
 
     private void OnEnable()
@@ -44,6 +44,7 @@ public class PlayerManagerEditor : Editor
         #region Shoot setting
         ballPrefab = serializedObject.FindProperty("BallPrefab");
         ballSpeed = serializedObject.FindProperty("BallSpeed");
+        fireRate = serializedObject.FindProperty("FireRate");
         #endregion
 
         #region Editor Variables
@@ -103,6 +104,7 @@ public class PlayerManagerEditor : Editor
         {
             EditorGUILayout.PropertyField(ballPrefab, new GUIContent("Ball Prefab"));
             EditorGUILayout.PropertyField(ballSpeed, new GUIContent("Ball Speed"));
+            EditorGUILayout.PropertyField(fireRate, new GUIContent("Fire Rate"));
         }
 
         EditorPrefs.GetBool("shootSettingFoldout", shootSettingFoldout);

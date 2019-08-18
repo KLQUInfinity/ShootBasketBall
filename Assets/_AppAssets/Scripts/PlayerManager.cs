@@ -23,6 +23,9 @@ public class PlayerManager : MonoBehaviour
     #region Shoot Setting
     public GameObject BallPrefab;
     public float BallSpeed;
+    public float FireRate;
+
+    private float nextFire;
     #endregion
 
     private void Update()
@@ -76,8 +79,12 @@ public class PlayerManager : MonoBehaviour
 
     private void ShootBall()
     {
-        GameObject instance = Instantiate(BallPrefab);
-        instance.transform.position = transform.position;
-        instance.GetComponent<Rigidbody>().velocity = Vector3.forward * BallSpeed * Time.deltaTime;
+        if (Time.time > nextFire)
+        {
+            nextFire = Time.time + FireRate;
+            GameObject instance = Instantiate(BallPrefab);
+            instance.transform.position = transform.position;
+            instance.GetComponent<Rigidbody>().velocity = transform.rotation * Vector3.forward * BallSpeed * Time.deltaTime;
+        }
     }
 }
